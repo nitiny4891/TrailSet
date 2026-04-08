@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Trailset — Your trail is set.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --green:#1D9E75;--gl:#E1F5EE;--gd:#085041;--gm:#0F6E56;--gsage:#5DCAA5;
+  --night:#141210;--parch:#F5F3EE;--stone:#888780;--dust:#D9D6CE;--amber:#C97B3A;
+  --serif:'DM Serif Display',serif;--sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--parch);color:var(--night);overflow-x:hidden;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+
+.fu{animation:fadeUp .6s ease both;}
+.fu1{animation:fadeUp .6s .1s ease both;}
+.fu2{animation:fadeUp .6s .22s ease both;}
+.fu3{animation:fadeUp .6s .34s ease both;}
+.fu4{animation:fadeUp .6s .46s ease both;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:60px;
+  background:rgba(245,243,238,.92);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:0.5px solid rgba(20,18,16,.08);
+}
+.nav-logo{display:flex;align-items:center;cursor:pointer;text-decoration:none;}
+.nav-links{display:flex;align-items:center;gap:1.75rem;}
+.nav-links a{font-size:13px;color:var(--stone);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--night);}
+.nav-cta{display:flex;gap:8px;align-items:center;}
+.btn-nav-ghost{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--night);background:transparent;border:0.5px solid var(--dust);border-radius:8px;padding:7px 14px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+.btn-nav-ghost:hover{border-color:var(--green);color:var(--green);}
+.btn-nav-primary{font-family:var(--sans);font-size:13px;font-weight:500;color:#fff;background:var(--green);border:none;border-radius:8px;padding:7px 16px;cursor:pointer;transition:opacity .2s;text-decoration:none;display:inline-block;}
+.btn-nav-primary:hover{opacity:.88;}
+
+/* ── SECTIONS ── */
+.hidden{display:none!important;}
+#landing{display:block;}
+#product{display:none;}
+
+/* ══════════════════════════════════
+   LANDING PAGE
+══════════════════════════════════ */
+
+/* HERO */
+.hero{
+  min-height:100vh;padding:100px 5% 80px;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;gap:3rem;position:relative;overflow:hidden;
+}
+.hero::before{content:'';position:absolute;top:-150px;right:-150px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(29,158,117,.07) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gl);color:var(--gd);font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;margin-bottom:1.25rem;}
+.badge-pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+.hero h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4rem);line-height:1.1;color:var(--night);margin-bottom:1rem;}
+.hero h1 em{font-style:italic;color:var(--green);}
+.hero-sub{font-size:16px;font-weight:300;color:var(--stone);line-height:1.75;max-width:460px;margin-bottom:1.75rem;}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:2rem;}
+.btn-lg-primary{font-family:var(--sans);font-size:15px;font-weight:500;color:#fff;background:var(--green);border:none;border-radius:10px;padding:13px 26px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px;}
+.btn-lg-primary:hover{opacity:.88;transform:translateY(-1px);}
+.btn-lg-ghost{font-family:var(--sans);font-size:15px;font-weight:400;color:var(--night);background:transparent;border:0.5px solid var(--dust);border-radius:10px;padding:13px 22px;cursor:pointer;transition:all .2s;}
+.btn-lg-ghost:hover{border-color:var(--night);}
+.social-proof{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--stone);}
+.avatars{display:flex;}
+.av{width:26px;height:26px;border-radius:50%;border:2px solid var(--parch);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;margin-left:-7px;}
+.avatars .av:first-child{margin-left:0;}
+
+/* HERO VISUAL */
+.hero-visual{display:flex;align-items:center;justify-content:center;}
+.hv-wrap{position:relative;width:100%;max-width:340px;}
+.hv-main{background:#fff;border-radius:18px;padding:1.5rem;border:0.5px solid rgba(20,18,16,.08);animation:float 4s ease-in-out infinite;}
+.hv-eye{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--green);margin-bottom:.4rem;}
+.hv-title{font-family:var(--serif);font-size:1.1rem;color:var(--night);margin-bottom:.85rem;}
+.hv-phases{display:flex;gap:3px;margin-bottom:.85rem;}
+.hv-ph{flex:1;height:3px;border-radius:2px;}
+.hv-ph.done{background:var(--green);}
+.hv-ph.act{background:var(--gsage);}
+.hv-ph.up{background:var(--dust);}
+.hv-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid rgba(20,18,16,.05);font-size:12px;}
+.hv-row:last-child{border-bottom:none;}
+.hv-lbl{color:var(--stone);}
+.hv-val{font-weight:500;color:var(--night);}
+.hv-val.g{color:var(--green);}
+.hv-progress{height:3px;background:rgba(20,18,16,.06);border-radius:2px;margin-top:10px;}
+.hv-prog-fill{width:40%;height:100%;background:var(--green);border-radius:2px;}
+.hv-sub{font-size:10px;color:var(--stone);margin-top:4px;}
+.float-card{position:absolute;background:var(--night);border-radius:10px;padding:9px 13px;bottom:-16px;right:-16px;}
+.fc-lbl{font-size:9px;color:rgba(255,255,255,.5);margin-bottom:1px;}
+.fc-val{font-size:13px;font-weight:500;color:#fff;}
+.fc-sub{font-size:9px;color:var(--gsage);}
+.float-card2{position:absolute;background:var(--green);border-radius:10px;padding:9px 13px;top:-12px;left:-12px;}
+.fc2-lbl{font-size:9px;color:rgba(255,255,255,.7);margin-bottom:1px;}
+.fc2-val{font-size:12px;font-weight:500;color:#fff;}
+
+/* MARQUEE */
+.marquee-wrap{background:var(--night);padding:14px 0;overflow:hidden;border-top:0.5px solid rgba(255,255,255,.04);border-bottom:0.5px solid rgba(255,255,255,.04);}
+.marquee-track{display:flex;gap:2.5rem;animation:marquee 28s linear infinite;white-space:nowrap;}
+.mq-item{font-size:12px;font-weight:300;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:.6rem;}
+.mq-item strong{color:rgba(255,255,255,.65);font-weight:500;}
+.mq-dot{width:4px;height:4px;border-radius:50%;background:var(--green);flex-shrink:0;}
+
+/* SECTIONS */
+section{padding:90px 5%;}
+.sec-inner{max-width:1060px;margin:0 auto;}
+.sec-eye{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--gm);margin-bottom:.6rem;}
+.sec-title{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.2;color:var(--night);margin-bottom:.85rem;}
+.sec-title em{font-style:italic;color:var(--green);}
+.sec-sub{font-size:15px;font-weight:300;color:var(--stone);line-height:1.75;max-width:500px;}
+
+/* HOW IT WORKS */
+.hiw{background:#fff;}
+.hiw-hdr{text-align:center;margin-bottom:3.5rem;}
+.hiw-hdr .sec-sub{margin:0 auto;}
+.hiw-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;position:relative;}
+.hiw-steps::before{content:'';position:absolute;top:30px;left:calc(16.6% + 16px);right:calc(16.6% + 16px);height:0.5px;background:var(--dust);}
+.step{text-align:center;}
+.step-num{width:60px;height:60px;border-radius:50%;background:var(--parch);border:0.5px solid var(--dust);font-family:var(--serif);font-size:1.4rem;color:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;position:relative;z-index:1;}
+.step-title{font-size:15px;font-weight:500;color:var(--night);margin-bottom:.4rem;}
+.step-desc{font-size:13px;font-weight:300;color:var(--stone);line-height:1.7;}
+
+/* MODES */
+.modes{background:var(--parch);}
+.modes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.5rem;}
+.mode-card{border-radius:18px;padding:1.75rem;}
+.mode-card.m1{background:#fff;border:0.5px solid rgba(20,18,16,.08);}
+.mode-card.m2{background:var(--night);}
+.m-num{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;}
+.mode-card.m1 .m-num{color:var(--green);}
+.mode-card.m2 .m-num{color:var(--gsage);}
+.m-title{font-family:var(--serif);font-size:1.4rem;line-height:1.2;margin-bottom:.5rem;}
+.mode-card.m1 .m-title{color:var(--night);}
+.mode-card.m2 .m-title{color:#fff;}
+.m-desc{font-size:13px;font-weight:300;line-height:1.7;margin-bottom:1.25rem;}
+.mode-card.m1 .m-desc{color:var(--stone);}
+.mode-card.m2 .m-desc{color:rgba(255,255,255,.55);}
+.m-features{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.m-feat{display:flex;align-items:center;gap:7px;font-size:13px;}
+.mode-card.m1 .m-feat{color:var(--night);}
+.mode-card.m2 .m-feat{color:rgba(255,255,255,.8);}
+.feat-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.mode-card.m1 .feat-dot{background:var(--green);}
+.mode-card.m2 .feat-dot{background:var(--gsage);}
+.m-cta{display:inline-block;margin-top:1.25rem;font-size:12px;font-weight:500;padding:7px 14px;border-radius:20px;cursor:pointer;border:none;transition:opacity .2s;}
+.mode-card.m1 .m-cta{background:var(--gl);color:var(--gd);}
+.mode-card.m2 .m-cta{background:rgba(255,255,255,.1);color:#fff;}
+.m-cta:hover{opacity:.8;}
+
+/* PRICING */
+.pricing{background:#fff;}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:860px;margin:0 auto;align-items:start;}
+.plan{border-radius:18px;padding:1.5rem;border:0.5px solid rgba(20,18,16,.1);background:var(--parch);position:relative;}
+.plan.featured{background:var(--night);border:none;transform:scale(1.03);}
+.plan-pop{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:10px;font-weight:500;padding:3px 12px;border-radius:20px;white-space:nowrap;}
+.plan-name{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--stone);margin-bottom:.4rem;}
+.plan.featured .plan-name{color:rgba(255,255,255,.4);}
+.plan-price{font-family:var(--serif);font-size:2.25rem;color:var(--night);margin-bottom:.15rem;}
+.plan.featured .plan-price{color:#fff;}
+.plan-per{font-size:12px;color:var(--stone);}
+.plan.featured .plan-per{color:rgba(255,255,255,.35);}
+.plan-desc{font-size:12px;color:var(--stone);margin:1rem 0;padding-bottom:1rem;border-bottom:0.5px solid rgba(20,18,16,.08);line-height:1.6;}
+.plan.featured .plan-desc{color:rgba(255,255,255,.4);border-bottom-color:rgba(255,255,255,.08);}
+.plan-feats{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:1.25rem;}
+.plan-feat{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--night);}
+.plan.featured .plan-feat{color:rgba(255,255,255,.75);}
+.plan-feat-dot{width:4px;height:4px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:4px;}
+.plan-btn{width:100%;font-family:var(--sans);font-size:13px;font-weight:500;border-radius:9px;padding:11px;cursor:pointer;transition:all .2s;border:0.5px solid rgba(20,18,16,.12);background:#fff;color:var(--night);}
+.plan-btn:hover{border-color:var(--green);color:var(--green);}
+.plan.featured .plan-btn{background:var(--green);color:#fff;border:none;}
+.plan.featured .plan-btn:hover{opacity:.88;}
+
+/* CTA */
+.cta-section{background:var(--green);padding:90px 5%;text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none;}
+.cta-title{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3.5rem);color:#fff;margin-bottom:.85rem;line-height:1.15;}
+.cta-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.72);margin-bottom:2rem;line-height:1.7;}
+.cta-btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+.btn-white{font-family:var(--sans);font-size:15px;font-weight:500;background:#fff;color:var(--green);border:none;border-radius:10px;padding:13px 26px;cursor:pointer;transition:all .2s;}
+.btn-white:hover{transform:translateY(-2px);}
+.btn-outline-white{font-family:var(--sans);font-size:15px;font-weight:400;background:transparent;color:#fff;border:0.5px solid rgba(255,255,255,.4);border-radius:10px;padding:13px 22px;cursor:pointer;transition:all .2s;}
+.btn-outline-white:hover{border-color:#fff;}
+
+/* FOOTER */
+footer{background:var(--night);padding:56px 5% 36px;color:rgba(255,255,255,.4);}
+.footer-inner{max-width:1060px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
+.footer-brand p{font-size:12px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.7;margin-top:.65rem;max-width:200px;}
+.footer-col-title{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:.85rem;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:rgba(255,255,255,.8);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:0.5px solid rgba(255,255,255,.06);padding-top:1.1rem;font-size:11px;}
+.footer-legal{display:flex;gap:1.25rem;}
+.footer-legal a{color:rgba(255,255,255,.3);text-decoration:none;}
+
+/* ══════════════════════════════════
+   PRODUCT APP
+══════════════════════════════════ */
+.app-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:60px;
+  background:rgba(245,243,238,.92);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:0.5px solid rgba(20,18,16,.08);
+}
+.app-nav-tabs{display:flex;gap:4px;}
+.atab{font-family:var(--sans);font-size:12px;padding:5px 12px;border-radius:20px;border:0.5px solid transparent;color:var(--stone);cursor:pointer;transition:all .15s;background:transparent;}
+.atab:hover{color:var(--night);}
+.atab.act{background:var(--gl);color:var(--gd);border-color:#9FE1CB;font-weight:500;}
+.app-back{font-family:var(--sans);font-size:12px;color:var(--stone);background:transparent;border:0.5px solid var(--dust);border-radius:8px;padding:5px 12px;cursor:pointer;transition:all .2s;}
+.app-back:hover{border-color:var(--green);color:var(--green);}
+.dash-dot-app{width:7px;height:7px;border-radius:50%;background:var(--green);display:none;margin-left:-3px;margin-top:-8px;}
+
+/* app pages */
+.app-page{padding:76px 0 2.5rem;}
+.app-screen{padding:0 1.25rem;}
+
+/* hero small */
+.app-hero{padding:1.5rem 1.25rem;background:var(--parch);border-bottom:0.5px solid rgba(20,18,16,.08);}
+.app-hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gl);color:var(--gd);font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;margin-bottom:.85rem;}
+.app-hero h2{font-family:var(--serif);font-size:1.75rem;line-height:1.2;color:var(--night);margin-bottom:.3rem;}
+.app-hero h2 em{font-style:italic;color:var(--green);}
+.app-hero p{font-size:13px;color:var(--stone);line-height:1.65;max-width:480px;margin-bottom:1rem;}
+.mode-toggle{display:flex;background:rgba(20,18,16,.06);border-radius:10px;padding:3px;gap:3px;width:fit-content;}
+.mt-btn{font-family:var(--sans);font-size:13px;font-weight:500;padding:8px 18px;border-radius:8px;border:none;cursor:pointer;transition:all .2s;color:var(--stone);background:transparent;}
+.mt-btn.act{background:#fff;color:var(--night);box-shadow:0 1px 3px rgba(0,0,0,.07);}
+
+/* form panel */
+.panel{background:#fff;border:0.5px solid rgba(20,18,16,.08);border-radius:14px;padding:1.4rem;margin:1rem 1.25rem;}
+.panel-eye{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:.3rem;}
+.panel-title{font-family:var(--serif);font-size:1.15rem;color:var(--night);margin-bottom:.3rem;}
+.panel-sub{font-size:12px;color:var(--stone);margin-bottom:.9rem;line-height:1.6;}
+.field{margin-bottom:.9rem;}
+.fl{font-size:10px;font-weight:500;color:var(--stone);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.3rem;display:block;}
+input[type=text],textarea{width:100%;font-family:var(--sans);font-size:13px;color:var(--night);background:rgba(20,18,16,.04);border:0.5px solid rgba(20,18,16,.12);border-radius:8px;padding:9px 12px;outline:none;transition:border-color .2s;}
+textarea{resize:none;height:56px;}
+input:focus,textarea:focus{border-color:var(--green);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;}
+.chip{font-size:11px;padding:3px 9px;border-radius:20px;border:0.5px solid rgba(20,18,16,.12);background:rgba(20,18,16,.03);color:var(--stone);cursor:pointer;transition:all .15s;user-select:none;}
+.chip:hover{border-color:var(--green);color:var(--green);}
+.chip.sel{background:var(--gl);border-color:var(--green);color:var(--gd);font-weight:500;}
+.go-btn{width:100%;font-family:var(--sans);font-weight:500;font-size:14px;background:var(--green);color:#fff;border:none;border-radius:8px;padding:12px;cursor:pointer;margin-top:.2rem;transition:opacity .2s;}
+.go-btn:hover{opacity:.88;}
+.go-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* loading */
+.loading{text-align:center;padding:3rem 1.25rem;}
+.spinner{width:28px;height:28px;border:2px solid rgba(20,18,16,.1);border-top-color:var(--green);border-radius:50%;margin:0 auto .7rem;animation:spin .75s linear infinite;}
+.lt{font-family:var(--serif);font-size:1rem;color:var(--night);margin-bottom:.2rem;}
+.ls{font-size:12px;color:var(--stone);}
+
+/* results */
+.result-wrap{padding:0 1.25rem;}
+.r-eye{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--green);margin-bottom:.3rem;}
+.r-title{font-family:var(--serif);font-size:1.4rem;color:var(--night);margin-bottom:.2rem;}
+.r-sub{font-size:12px;color:var(--stone);margin-bottom:.8rem;}
+.result-card{background:#fff;border:2px solid var(--green);border-radius:14px;padding:1.25rem;margin-bottom:.7rem;}
+.result-body{font-size:13px;color:var(--stone);line-height:1.8;white-space:pre-wrap;}
+.result-body strong{font-weight:500;color:var(--night);}
+.arow{display:flex;gap:8px;flex-wrap:wrap;margin-top:.7rem;}
+.abtn{font-family:var(--sans);font-size:12px;padding:7px 14px;border-radius:8px;border:0.5px solid rgba(20,18,16,.15);background:transparent;color:var(--stone);cursor:pointer;transition:all .15s;}
+.abtn:hover{border-color:var(--green);color:var(--green);}
+.abtn.primary{background:var(--green);color:#fff;border-color:var(--green);}
+.abtn.primary:hover{opacity:.88;}
+
+/* phase bar */
+.phase-bar{display:flex;border-radius:8px;overflow:hidden;border:0.5px solid rgba(20,18,16,.1);margin-bottom:.8rem;}
+.ph{flex:1;padding:7px 4px;background:rgba(20,18,16,.03);border-right:0.5px solid rgba(20,18,16,.08);cursor:pointer;transition:background .15s;text-align:center;}
+.ph:last-child{border-right:none;}
+.ph.ph-done{background:var(--gl);}
+.ph.ph-act{background:#fff;box-shadow:inset 0 -2px 0 var(--green);}
+.ph:hover:not(.ph-act){background:#fff;}
+.ph-n{font-size:9px;color:var(--stone);}
+.ph-nm{font-size:10px;font-weight:500;color:var(--night);}
+.ph.ph-done .ph-nm{color:var(--gd);}
+.pc{display:none;}
+.pc.act{display:block;}
+
+/* section blocks */
+.sb{background:#fff;border:0.5px solid rgba(20,18,16,.08);border-radius:11px;overflow:hidden;margin-bottom:.6rem;}
+.sh{padding:9px 13px;border-bottom:0.5px solid rgba(20,18,16,.06);display:flex;align-items:center;gap:6px;}
+.si{width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.st{font-size:12px;font-weight:500;color:var(--night);}
+.sbody{padding:10px 13px;}
+.sbody p{font-size:12px;color:var(--stone);line-height:1.7;margin-bottom:4px;}
+.dnd{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.dc{border-radius:8px;padding:8px 10px;}
+.dc.do{background:var(--gl);}
+.dc.dn{background:#FCEBEB;}
+.dl{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
+.dc.do .dl{color:var(--gd);}
+.dc.dn .dl{color:#791F1F;}
+.di{font-size:11px;line-height:1.55;display:flex;gap:4px;margin-bottom:2px;align-items:flex-start;}
+.dc.do .di{color:var(--gm);}
+.dc.dn .di{color:#A32D2D;}
+.ddot{width:3px;height:3px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.dc.do .ddot{background:var(--green);}
+.dc.dn .ddot{background:#E24B4A;}
+.vr{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:0.5px solid rgba(20,18,16,.06);}
+.vr:last-child{border-bottom:none;}
+.vbadge{font-size:9px;font-weight:500;padding:2px 6px;border-radius:6px;flex-shrink:0;margin-top:1px;}
+.vl{background:#E6F1FB;color:#0C447C;}
+.vo{background:#FAEEDA;color:#633806;}
+.vg{background:#F1EFE8;color:#444441;}
+.vn{font-size:12px;font-weight:500;color:var(--night);}
+.vd{font-size:11px;color:var(--stone);margin-top:1px;line-height:1.5;}
+.vtip{font-size:10px;color:var(--gd);background:var(--gl);padding:2px 7px;border-radius:5px;margin-top:3px;display:inline-block;}
+.er{display:flex;gap:9px;padding:6px 0;border-bottom:0.5px solid rgba(20,18,16,.06);}
+.er:last-child{border-bottom:none;}
+.et{font-size:11px;font-weight:500;color:var(--night);width:68px;flex-shrink:0;padding-top:1px;}
+.ed{font-size:11px;color:var(--stone);line-height:1.55;}
+.pnav{display:flex;justify-content:space-between;align-items:center;margin-top:.8rem;}
+.pnav-info{font-size:11px;color:var(--stone);}
+
+/* dashboard */
+.dash-wrap{padding:1rem 1.25rem 2rem;}
+.dash-sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:1.25rem;}
+.ds{background:rgba(20,18,16,.04);border-radius:8px;padding:.8rem;}
+.ds-label{font-size:11px;color:var(--stone);margin-bottom:3px;}
+.ds-val{font-size:20px;font-weight:500;color:var(--night);}
+.ds-sub{font-size:10px;color:var(--stone);margin-top:1px;opacity:.7;}
+.sec-lbl{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--stone);margin:.85rem 0 .4rem;}
+.plan-card{background:#fff;border:0.5px solid rgba(20,18,16,.08);border-radius:12px;overflow:hidden;margin-bottom:.65rem;}
+.pc-hdr{padding:11px 13px;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.pc-title{font-size:13px;font-weight:500;color:var(--night);margin-bottom:1px;}
+.pc-meta{font-size:11px;color:var(--stone);}
+.pc-badge{font-size:10px;font-weight:500;padding:2px 8px;border-radius:8px;flex-shrink:0;}
+.pba{background:var(--gl);color:var(--gd);}
+.pbd{background:#F1EFE8;color:#444441;}
+.prog-wrap{padding:0 13px 9px;}
+.prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--stone);margin-bottom:4px;}
+.prog-bar-wrap{height:4px;background:rgba(20,18,16,.06);border-radius:2px;}
+.prog-fill{height:100%;border-radius:2px;background:var(--green);transition:width .5s;}
+.plan-phases{border-top:0.5px solid rgba(20,18,16,.06);display:flex;}
+.pp{flex:1;padding:6px 4px;text-align:center;border-right:0.5px solid rgba(20,18,16,.06);font-size:9px;}
+.pp:last-child{border-right:none;}
+.pp.pp-done{background:var(--gl);color:var(--gd);}
+.pp.pp-cur{color:var(--green);font-weight:500;}
+.pp.pp-up{color:var(--stone);}
+.resume-row{border-top:0.5px solid rgba(20,18,16,.06);padding:9px 13px;display:flex;align-items:center;justify-content:space-between;background:rgba(20,18,16,.02);cursor:pointer;transition:background .15s;}
+.resume-row:hover{background:#fff;}
+.resume-text{font-size:12px;font-weight:500;color:var(--green);}
+.resume-hint{font-size:11px;color:var(--stone);}
+.m1-dash{background:#fff;border:0.5px solid rgba(20,18,16,.08);border-radius:11px;padding:11px 13px;margin-bottom:.65rem;}
+.m1d-lbl{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--stone);margin-bottom:3px;}
+.m1d-title{font-size:14px;font-weight:500;color:var(--night);margin-bottom:2px;}
+.m1d-meta{font-size:12px;color:var(--stone);}
+.streak{display:flex;align-items:center;gap:3px;margin-top:6px;}
+.sk-dot{width:9px;height:9px;border-radius:50%;}
+.sk-on{background:var(--green);}
+.sk-off{background:var(--dust);}
+.sk-lbl{font-size:10px;color:var(--stone);margin-left:4px;}
+.empty-state{text-align:center;padding:2.5rem 1rem;}
+.es-title{font-family:var(--serif);font-size:1.2rem;color:var(--night);margin-bottom:.3rem;}
+.es-sub{font-size:13px;color:var(--stone);margin-bottom:1rem;}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr;padding-top:80px;}
+  .hero-visual{display:none;}
+  .modes-grid,.footer-top{grid-template-columns:1fr;}
+  .hiw-steps{grid-template-columns:1fr;gap:1.5rem;}
+  .hiw-steps::before{display:none;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .plan.featured{transform:none;}
+  nav .nav-links{display:none;}
+  .two-col{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     LANDING PAGE
+══════════════════════════════ -->
+<div id="landing">
+
+<nav>
+  <a class="nav-logo" href="#" onclick="return false;">
+    <svg width="120" height="28" viewBox="0 0 150 33" fill="none">
+      <circle cx="7" cy="24" r="3" fill="#1D9E75"/>
+      <circle cx="16" cy="16" r="3" fill="#1D9E75"/>
+      <circle cx="26" cy="7" r="4.5" fill="#141210"/>
+      <line x1="10" y1="22" x2="13.5" y2="18.5" stroke="#1D9E75" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="19" y1="14" x2="23" y2="10" stroke="#1D9E75" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M26 2 L26 -1 L33 5.5 L26 12 L26 8" fill="#141210"/>
+      <text x="42" y="22" font-family="'DM Sans',sans-serif" font-weight="600" font-size="19" fill="#141210" letter-spacing="-0.4">trail</text>
+      <text x="87" y="22" font-family="'DM Sans',sans-serif" font-weight="300" font-size="19" fill="#1D9E75" letter-spacing="-0.4">set</text>
+    </svg>
+  </a>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#modes">What we do</a>
+    <a href="#pricing">Pricing</a>
+  </div>
+  <div class="nav-cta">
+    <button class="btn-nav-ghost" onclick="launchProduct()">Sign in</button>
+    <button class="btn-nav-primary" onclick="launchProduct()">Get started free</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge fu"><div class="badge-pulse"></div>AI-powered career & business guide</div>
+    <h1 class="fu1">Your trail<br>is <em>set.</em></h1>
+    <p class="hero-sub fu2">Lost on what to do with your life? Or already know your goal and need to execute it? Trailset guides you every step — with real local advice, vendor lists, and a personal dashboard.</p>
+    <div class="hero-btns fu3">
+      <button class="btn-lg-primary" onclick="launchProduct()">
+        Start for free
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5h8M8 3l3 3.5-3 3.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <a href="#how" class="btn-lg-ghost">See how it works</a>
+    </div>
+    <div class="social-proof fu4">
+      <div class="avatars">
+        <div class="av" style="background:#E8F2EB;color:#0F6E56;">AK</div>
+        <div class="av" style="background:#FEF3E8;color:#8B4A14;">RJ</div>
+        <div class="av" style="background:#EEF2FB;color:#2D4A9E;">SC</div>
+        <div class="av" style="background:#FBF0F5;color:#7A2545;">MP</div>
+      </div>
+      <span>Joined by <strong style="color:var(--night);">2,400+ people</strong> this month</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hv-wrap">
+      <div class="hv-main" style="position:relative;">
+        <div class="float-card2"><div class="fc2-lbl">Current phase</div><div class="fc2-val">Procurement · India</div></div>
+        <div class="hv-eye">Your execution plan</div>
+        <div class="hv-title">Mountain café · Colombia</div>
+        <div class="hv-phases">
+          <div class="hv-ph done"></div><div class="hv-ph done"></div>
+          <div class="hv-ph act"></div><div class="hv-ph up"></div><div class="hv-ph up"></div>
+        </div>
+        <div class="hv-row"><span class="hv-lbl">Location scouted</span><span class="hv-val g">Done ✓</span></div>
+        <div class="hv-row"><span class="hv-lbl">Vendors identified</span><span class="hv-val g">4 found ✓</span></div>
+        <div class="hv-row"><span class="hv-lbl">Permits checklist</span><span class="hv-val">In progress</span></div>
+        <div class="hv-row"><span class="hv-lbl">Est. startup cost</span><span class="hv-val">COP 28–40M</span></div>
+        <div class="hv-progress"><div class="hv-prog-fill"></div></div>
+        <div class="hv-sub">40% complete · Phase 3 of 5</div>
+        <div class="float-card"><div class="fc-lbl">AI insight</div><div class="fc-val">Save 35% on equipment</div><div class="fc-sub">Buy secondhand locally →</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="mq-item"><div class="mq-dot"></div><strong>Nigeria</strong> · Food delivery</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>India</strong> · UX design career</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Brazil</strong> · Clothing boutique</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Germany</strong> · Freelance engineering</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Philippines</strong> · Online tutoring</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Kenya</strong> · Agritech startup</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>UAE</strong> · Consulting firm</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Mexico</strong> · Restaurant group</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Pakistan</strong> · Digital marketing</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Indonesia</strong> · E-commerce brand</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Nigeria</strong> · Food delivery</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>India</strong> · UX design career</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Brazil</strong> · Clothing boutique</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Germany</strong> · Freelance engineering</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Philippines</strong> · Online tutoring</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Kenya</strong> · Agritech startup</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>UAE</strong> · Consulting firm</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Mexico</strong> · Restaurant group</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Pakistan</strong> · Digital marketing</div>
+    <div class="mq-item"><div class="mq-dot"></div><strong>Indonesia</strong> · E-commerce brand</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="hiw" id="how">
+  <div class="sec-inner">
+    <div class="hiw-hdr">
+      <div class="sec-eye">How it works</div>
+      <h2 class="sec-title">Three steps from <em>lost</em> to launched</h2>
+      <p class="sec-sub">Whether you need to find your direction or execute a plan you already have — Trailset meets you where you are.</p>
+    </div>
+    <div class="hiw-steps">
+      <div class="step"><div class="step-num">1</div><div class="step-title">Tell us where you are</div><p class="step-desc">Confused about direction? Use Mode 1. Already know your goal? Jump straight to Mode 2. Both start on the same screen.</p></div>
+      <div class="step"><div class="step-num">2</div><div class="step-title">Get your personalised playbook</div><p class="step-desc">AI builds your roadmap tailored to your country, budget, and background — real vendor categories, local pricing, dos & don'ts, honest timelines.</p></div>
+      <div class="step"><div class="step-num">3</div><div class="step-title">Execute and stay accountable</div><p class="step-desc">Your dashboard tracks every phase. Mark steps done, pick up where you left off. Your trail is always set — never lost.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODES -->
+<section class="modes" id="modes">
+  <div class="sec-inner">
+    <div class="sec-eye">Two modes, one platform</div>
+    <h2 class="sec-title">Meet you wherever<br>you <em>actually</em> are</h2>
+    <div class="modes-grid">
+      <div class="mode-card m1">
+        <div class="m-num">Mode 1 — Discover</div>
+        <div class="m-title">I don't know what to do.</div>
+        <div class="m-desc">Tell us your personality, interests, and goals. Our AI identifies your ideal career or business path — and explains exactly why it fits you — tailored to your country's real job market.</div>
+        <ul class="m-features">
+          <li class="m-feat"><div class="feat-dot"></div>Personality & interest profiling</li>
+          <li class="m-feat"><div class="feat-dot"></div>Country-specific career recommendations</li>
+          <li class="m-feat"><div class="feat-dot"></div>90-day action plan with local resources</li>
+          <li class="m-feat"><div class="feat-dot"></div>Business blueprint if entrepreneurial</li>
+          <li class="m-feat"><div class="feat-dot"></div>One-tap handoff to execution mode</li>
+        </ul>
+        <button class="m-cta" onclick="launchProduct(1)">Try Mode 1 — free →</button>
+      </div>
+      <div class="mode-card m2">
+        <div class="m-num">Mode 2 — Execute</div>
+        <div class="m-title">I know my goal.<br>Guide me through it.</div>
+        <div class="m-desc">Type what you want to build. We generate a full 5-phase execution playbook — who to approach, what to avoid, what to expect — all localised to your country.</div>
+        <ul class="m-features">
+          <li class="m-feat"><div class="feat-dot"></div>5-phase execution roadmap</li>
+          <li class="m-feat"><div class="feat-dot"></div>Vendor categories with local pricing</li>
+          <li class="m-feat"><div class="feat-dot"></div>Phase-specific dos & don'ts</li>
+          <li class="m-feat"><div class="feat-dot"></div>Realistic week-by-week timelines</li>
+          <li class="m-feat"><div class="feat-dot"></div>Progress dashboard & resume anytime</li>
+        </ul>
+        <button class="m-cta" onclick="launchProduct(2)">Try Mode 2 — free →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="sec-inner">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="sec-eye">Pricing</div>
+      <h2 class="sec-title">Start free.<br><em>Upgrade when ready.</em></h2>
+      <p class="sec-sub" style="margin:0 auto;">One free plan to see if Trailset works for you. No credit card needed.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">$0</div>
+        <div class="plan-per">Free forever</div>
+        <div class="plan-desc">Try Trailset and see if it works before committing.</div>
+        <ul class="plan-feats">
+          <li class="plan-feat"><div class="plan-feat-dot"></div>1 career discovery (Mode 1)</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>1 execution plan (Mode 2)</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>5-phase playbook</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>Basic progress dashboard</li>
+        </ul>
+        <button class="plan-btn" onclick="launchProduct()">Get started free</button>
+      </div>
+      <div class="plan featured">
+        <div class="plan-pop">Most popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$12</div>
+        <div class="plan-per">per month</div>
+        <div class="plan-desc">For people serious about executing their goal.</div>
+        <ul class="plan-feats">
+          <li class="plan-feat"><div class="plan-feat-dot"></div>Unlimited discoveries & plans</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>Full dashboard with tracking</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>Weekly AI check-in emails</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>Export plans to PDF</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>Save & resume across devices</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>Priority AI responses</li>
+        </ul>
+        <button class="plan-btn" onclick="launchProduct()">Start 7-day free trial</button>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Business</div>
+        <div class="plan-price">$49</div>
+        <div class="plan-per">per month</div>
+        <div class="plan-desc">For universities, bootcamps, and career centres.</div>
+        <ul class="plan-feats">
+          <li class="plan-feat"><div class="plan-feat-dot"></div>Up to 20 users</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>Admin analytics dashboard</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>White-label option</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>Bulk plan generation</li>
+          <li class="plan-feat"><div class="plan-feat-dot"></div>Dedicated support</li>
+        </ul>
+        <button class="plan-btn">Contact us</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="cta-title">Your trail is waiting.<br>Let's set it.</h2>
+  <p class="cta-sub">Join thousands of people who stopped drifting and started building — with a real plan, in their real country.</p>
+  <div class="cta-btns">
+    <button class="btn-white" onclick="launchProduct()">Start for free — no card needed</button>
+    <button class="btn-outline-white" onclick="launchProduct()">See a live demo</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg width="110" height="26" viewBox="0 0 140 30" fill="none">
+          <circle cx="6" cy="22" r="2.5" fill="#5DCAA5"/>
+          <circle cx="14" cy="15" r="2.5" fill="#5DCAA5"/>
+          <circle cx="23" cy="7" r="4" fill="#FFFFFF"/>
+          <line x1="8.5" y1="20.5" x2="12" y2="17" stroke="#5DCAA5" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="16.5" y1="13.5" x2="20" y2="10" stroke="#5DCAA5" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M23 3 L23 0 L29 5.5 L23 11 L23 7.5" fill="#FFFFFF"/>
+          <text x="37" y="20" font-family="'DM Sans',sans-serif" font-weight="600" font-size="17" fill="#FFFFFF" letter-spacing="-0.3">trail</text>
+          <text x="74" y="20" font-family="'DM Sans',sans-serif" font-weight="300" font-size="17" fill="#5DCAA5" letter-spacing="-0.3">set</text>
+        </svg>
+        <p>Your trail is set. Career discovery and business execution — personalised to your country.</p>
+      </div>
+      <div><div class="footer-col-title">Product</div><ul class="footer-links"><li><a href="#" onclick="launchProduct(1);return false;">Discover my path</a></li><li><a href="#" onclick="launchProduct(2);return false;">Execute my plan</a></li><li><a href="#" onclick="launchProduct();return false;">Dashboard</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul></div>
+      <div><div class="footer-col-title">Support</div><ul class="footer-links"><li><a href="#">Help centre</a></li><li><a href="#">Contact us</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 Trailset. All rights reserved.</span><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div>
+  </div>
+</footer>
+</div>
+
+<!-- ══════════════════════════════
+     PRODUCT APP
+══════════════════════════════ -->
+<div id="product" style="display:none;">
+
+<div class="app-nav">
+  <div style="cursor:pointer;" onclick="goLanding()">
+    <svg width="110" height="26" viewBox="0 0 140 30" fill="none">
+      <circle cx="6" cy="22" r="2.5" fill="#1D9E75"/>
+      <circle cx="14" cy="15" r="2.5" fill="#1D9E75"/>
+      <circle cx="23" cy="7" r="4" fill="#141210"/>
+      <line x1="8.5" y1="20.5" x2="12" y2="17" stroke="#1D9E75" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="16.5" y1="13.5" x2="20" y2="10" stroke="#1D9E75" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M23 3 L23 0 L29 5.5 L23 11 L23 7.5" fill="#141210"/>
+      <text x="37" y="20" font-family="'DM Sans',sans-serif" font-weight="600" font-size="17" fill="#141210" letter-spacing="-0.3">trail</text>
+      <text x="74" y="20" font-family="'DM Sans',sans-serif" font-weight="300" font-size="17" fill="#1D9E75" letter-spacing="-0.3">set</text>
+    </svg>
+  </div>
+  <div class="app-nav-tabs">
+    <div class="atab act" id="atab-home" onclick="showAppPage('home')">Home</div>
+    <div class="atab" id="atab-dash" onclick="showAppPage('dash')">My dashboard<div class="dash-dot-app" id="dash-dot"></div></div>
+  </div>
+  <button class="app-back" onclick="goLanding()">← Back to site</button>
+</div>
+
+<!-- APP HOME -->
+<div id="app-home" class="app-page">
+  <div class="app-hero">
+    <div class="app-hero-badge"><div class="badge-pulse"></div>Free to use · No sign-up needed</div>
+    <h2>Your trail is <em>set.</em></h2>
+    <p>Pick a mode and get started. Mode 1 finds your path — Mode 2 builds your execution plan.</p>
+    <div class="mode-toggle">
+      <button class="mt-btn act" id="mt1" onclick="switchMode(1)">Discover my path</button>
+      <button class="mt-btn" id="mt2" onclick="switchMode(2)">Execute my plan</button>
+    </div>
+  </div>
+
+  <!-- MODE 1 -->
+  <div id="panel-m1">
+    <div id="m1-form-wrap" class="panel">
+      <div class="panel-eye">Mode 1 — I don't know what to do</div>
+      <div class="panel-title">Find my ideal path</div>
+      <div class="panel-sub">Tell us about yourself and get a personalised career or business recommendation tailored to your country.</div>
+      <div class="field"><label class="fl">Your country</label><input type="text" id="m1-country" placeholder="e.g. India, Nigeria, Brazil, Germany, Philippines..."/></div>
+      <div class="field"><label class="fl">Personality traits — pick all that apply</label>
+        <div class="chips">
+          <span class="chip" data-v="creative" onclick="tog(this,'traits')">Creative</span>
+          <span class="chip" data-v="analytical" onclick="tog(this,'traits')">Analytical</span>
+          <span class="chip" data-v="empathetic" onclick="tog(this,'traits')">Empathetic</span>
+          <span class="chip" data-v="entrepreneurial" onclick="tog(this,'traits')">Entrepreneurial</span>
+          <span class="chip" data-v="natural leader" onclick="tog(this,'traits')">Leader</span>
+          <span class="chip" data-v="detail-oriented" onclick="tog(this,'traits')">Detail-oriented</span>
+          <span class="chip" data-v="risk-taker" onclick="tog(this,'traits')">Risk-taker</span>
+          <span class="chip" data-v="introverted" onclick="tog(this,'traits')">Introverted</span>
+          <span class="chip" data-v="extroverted" onclick="tog(this,'traits')">Extroverted</span>
+          <span class="chip" data-v="competitive" onclick="tog(this,'traits')">Competitive</span>
+          <span class="chip" data-v="curious" onclick="tog(this,'traits')">Curious</span>
+          <span class="chip" data-v="persuasive" onclick="tog(this,'traits')">Persuasive</span>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field"><label class="fl">Interests</label>
+          <div class="chips">
+            <span class="chip" data-v="technology" onclick="tog(this,'interests')">Technology</span>
+            <span class="chip" data-v="health & wellness" onclick="tog(this,'interests')">Health</span>
+            <span class="chip" data-v="finance" onclick="tog(this,'interests')">Finance</span>
+            <span class="chip" data-v="education" onclick="tog(this,'interests')">Education</span>
+            <span class="chip" data-v="arts & design" onclick="tog(this,'interests')">Arts & design</span>
+            <span class="chip" data-v="food & hospitality" onclick="tog(this,'interests')">Food</span>
+            <span class="chip" data-v="marketing" onclick="tog(this,'interests')">Marketing</span>
+            <span class="chip" data-v="real estate" onclick="tog(this,'interests')">Real estate</span>
+            <span class="chip" data-v="social impact" onclick="tog(this,'interests')">Social impact</span>
+            <span class="chip" data-v="environment" onclick="tog(this,'interests')">Environment</span>
+          </div>
+        </div>
+        <div class="field"><label class="fl">What matters most?</label>
+          <div class="chips">
+            <span class="chip" data-v="high income" onclick="tog(this,'goals')">High income</span>
+            <span class="chip" data-v="independence" onclick="tog(this,'goals')">Independence</span>
+            <span class="chip" data-v="work-life balance" onclick="tog(this,'goals')">Balance</span>
+            <span class="chip" data-v="impact & purpose" onclick="tog(this,'goals')">Impact</span>
+            <span class="chip" data-v="remote / flexible" onclick="tog(this,'goals')">Remote</span>
+            <span class="chip" data-v="fast growth" onclick="tog(this,'goals')">Fast growth</span>
+            <span class="chip" data-v="job security" onclick="tog(this,'goals')">Security</span>
+          </div>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:.4rem;"><label class="fl">Education / experience (optional)</label><input type="text" id="m1-bg" placeholder="e.g. Engineering degree, 3 years in sales, self-taught designer..."/></div>
+      <button class="go-btn" id="m1-btn" onclick="runM1()">Reveal my ideal path →</button>
+    </div>
+    <div id="m1-loading" class="loading hidden"><div class="spinner"></div><div class="lt">Mapping your profile...</div><div class="ls" id="m1-ls">Analysing your traits</div></div>
+    <div id="m1-result" class="result-wrap hidden">
+      <div class="r-eye">Your ideal path</div>
+      <div class="r-title" id="m1-rtitle"></div>
+      <div class="r-sub" id="m1-rsub"></div>
+      <div class="result-card"><div class="result-body" id="m1-rbody"></div></div>
+      <div class="arow">
+        <button class="abtn primary" onclick="switchToExecute()">Execute this plan now →</button>
+        <button class="abtn" onclick="showAppPage('dash')">View dashboard</button>
+        <button class="abtn" onclick="resetM1()">Try again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODE 2 -->
+  <div id="panel-m2" class="hidden">
+    <div id="m2-form-wrap" class="panel">
+      <div class="panel-eye">Mode 2 — I know what I want</div>
+      <div class="panel-title">Build my execution plan</div>
+      <div class="panel-sub">Tell us your goal and country. We'll guide you through every step — who to approach, what to watch out for, and what to expect. You execute, we guide.</div>
+      <div class="field"><label class="fl">What do you want to start or build?</label>
+        <textarea id="m2-goal" placeholder="e.g. Open a mountain café, start a freelance design studio, launch a tutoring business..."></textarea>
+        <div class="chips" style="margin-top:5px;">
+          <span class="chip" onclick="sg('Open a café in the mountains')">Mountain café</span>
+          <span class="chip" onclick="sg('Start a freelance graphic design studio')">Design studio</span>
+          <span class="chip" onclick="sg('Launch an online tutoring business')">Tutoring</span>
+          <span class="chip" onclick="sg('Open a small clothing boutique')">Clothing boutique</span>
+          <span class="chip" onclick="sg('Start a food delivery business')">Food delivery</span>
+          <span class="chip" onclick="sg('Launch a digital marketing agency')">Marketing agency</span>
+          <span class="chip" onclick="sg('Start a photography business')">Photography</span>
+          <span class="chip" onclick="sg('Open a gym or fitness studio')">Gym / fitness</span>
+          <span class="chip" onclick="sg('Start an e-commerce brand')">E-commerce</span>
+          <span class="chip" onclick="sg('Launch a consulting firm')">Consulting</span>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field"><label class="fl">Your country</label><input type="text" id="m2-country" placeholder="e.g. Colombia, India, Nigeria..."/></div>
+        <div class="field"><label class="fl">Budget (optional)</label><input type="text" id="m2-budget" placeholder="e.g. $3,000, ₦800k, €10k..."/></div>
+      </div>
+      <button class="go-btn" id="m2-btn" onclick="runM2()">Build my execution plan →</button>
+    </div>
+    <div id="m2-loading" class="loading hidden"><div class="spinner"></div><div class="lt">Building your playbook...</div><div class="ls" id="m2-ls">Mapping your local market</div></div>
+    <div id="m2-result" class="result-wrap hidden">
+      <div class="r-eye" id="m2-goal-lbl"></div>
+      <div class="r-title" id="m2-rtitle"></div>
+      <div class="r-sub" id="m2-rsub"></div>
+      <div class="phase-bar" id="phase-bar"></div>
+      <div id="phase-content"></div>
+      <div class="arow" style="margin-top:.75rem;">
+        <button class="abtn" onclick="showAppPage('dash')">View dashboard</button>
+        <button class="abtn" onclick="resetM2()">New plan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="app-dash" class="app-page hidden">
+  <div class="dash-wrap">
+    <div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:.3rem;">My dashboard</div>
+    <div style="font-family:var(--serif);font-size:1.4rem;color:var(--night);margin-bottom:1rem;">Your <em style="font-style:italic;color:var(--green);">progress</em></div>
+    <div id="dash-empty" class="empty-state hidden">
+      <div class="es-title">Nothing here yet</div>
+      <div class="es-sub">Complete a discovery or start an execution plan — your progress will be tracked here.</div>
+      <button class="abtn primary" onclick="showAppPage('home')">Get started →</button>
+    </div>
+    <div id="dash-content"></div>
+  </div>
+</div>
+
+</div><!-- /product -->
+
+<script>
+// ── STATE ──
+const S={traits:[],interests:[],goals:[],m1Result:null,m2Plan:null,m2Phase:0,m2Done:[],plans:[]};
+
+// ── LANDING / PRODUCT SWITCH ──
+function launchProduct(mode){
+  document.getElementById('landing').style.display='none';
+  document.getElementById('product').style.display='block';
+  window.scrollTo(0,0);
+  if(mode===2) switchMode(2);
+  else if(mode===1) switchMode(1);
+}
+function goLanding(){
+  document.getElementById('product').style.display='none';
+  document.getElementById('landing').style.display='block';
+  window.scrollTo(0,0);
+}
+
+// ── APP NAV ──
+function showAppPage(p){
+  ['home','dash'].forEach(id=>{
+    document.getElementById('app-'+id).classList.toggle('hidden',id!==p);
+    const t=document.getElementById('atab-'+id);
+    if(t)t.classList.toggle('act',id===p);
+  });
+  if(p==='dash')renderDash();
+  window.scrollTo(0,0);
+}
+
+// ── MODE TOGGLE ──
+function switchMode(m){
+  document.getElementById('mt1').classList.toggle('act',m===1);
+  document.getElementById('mt2').classList.toggle('act',m===2);
+  document.getElementById('panel-m1').classList.toggle('hidden',m!==1);
+  document.getElementById('panel-m2').classList.toggle('hidden',m!==2);
+}
+
+// ── CHIPS ──
+function tog(el,key){
+  const v=el.dataset.v;
+  if(el.classList.toggle('sel'))S[key].push(v);
+  else S[key]=S[key].filter(x=>x!==v);
+}
+function sg(t){document.getElementById('m2-goal').value=t;}
+
+// ── API ──
+async function callAI(prompt){
+  const r=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
+  });
+  const d=await r.json();
+  return d.content?.map(b=>b.text||'').join('')||'';
+}
+
+function startLoader(msgs,el){
+  let i=0;
+  return setInterval(()=>{i=(i+1)%msgs.length;el.textContent=msgs[i];},1900);
+}
+
+// ── MODE 1 ──
+function runM1(){
+  const country=document.getElementById('m1-country').value.trim();
+  if(!country){
+    document.getElementById('m1-country').style.borderColor='#E24B4A';
+    document.getElementById('m1-country').focus();return;
+  }
+  document.getElementById('m1-btn').disabled=true;
+  document.getElementById('m1-form-wrap').classList.add('hidden');
+  document.getElementById('m1-loading').classList.remove('hidden');
+  const bg=document.getElementById('m1-bg').value.trim();
+  const iv=startLoader(['Analysing your traits...','Reading the local market...','Finding your strengths...','Crafting your roadmap...'],document.getElementById('m1-ls'));
+  const prompt=`You are a world-class career advisor. The user is in ${country}. Tailor ALL advice specifically to ${country} — its job market, economy, real platform names, salary ranges in local currency, and cultural context.
+Profile: traits=${S.traits.join(',')||'not specified'}, interests=${S.interests.join(',')||'not specified'}, priorities=${S.goals.join(',')||'not specified'}, background=${bg||'not specified'}.
+Give a concise personalised recommendation with these exact sections using ** for headers:
+**Your ideal path** — one bold specific recommendation with 3-4 sentences on why it fits them in ${country}
+**Why this fits you** — 3 bullet points connecting their specific traits/interests to this path
+**90-day action plan** — 5 numbered concrete steps specific to ${country} with real platform/resource names
+**Business blueprint** — ONLY if entrepreneurial traits or independence goal: startup cost in ${country}'s local currency, revenue model, 3 milestones
+Be direct, specific to ${country}, no filler. Max 300 words.`;
+  callAI(prompt).then(text=>{
+    clearInterval(iv);
+    S.m1Result={country,traits:[...S.traits],interests:[...S.interests],goals:[...S.goals],text,date:new Date().toLocaleDateString()};
+    document.getElementById('m1-loading').classList.add('hidden');
+    document.getElementById('m1-result').classList.remove('hidden');
+    const tm=text.match(/\*\*Your ideal path\*\*[:\s\u2014-]*(.*?)(\n|$)/i);
+    document.getElementById('m1-rtitle').textContent=tm?tm[1].replace(/\*\*/g,'').trim():'Your personalised path';
+    document.getElementById('m1-rsub').textContent=country+' · Career recommendation';
+    document.getElementById('m1-rbody').innerHTML=text.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').split('\n').join('<br>');
+    document.getElementById('dash-dot').style.display='block';
+  }).catch(()=>{
+    clearInterval(iv);
+    document.getElementById('m1-loading').classList.add('hidden');
+    document.getElementById('m1-form-wrap').classList.remove('hidden');
+    document.getElementById('m1-btn').disabled=false;
+  });
+}
+
+function resetM1(){
+  S.traits=[];S.interests=[];S.goals=[];
+  document.querySelectorAll('.chip.sel').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('m1-result').classList.add('hidden');
+  document.getElementById('m1-form-wrap').classList.remove('hidden');
+  document.getElementById('m1-btn').disabled=false;
+  document.getElementById('m1-country').style.borderColor='';
+}
+
+function switchToExecute(){
+  const title=document.getElementById('m1-rtitle').textContent;
+  document.getElementById('m2-goal').value=title;
+  document.getElementById('m2-country').value=S.m1Result?.country||'';
+  switchMode(2);
+  window.scrollTo(0,0);
+}
+
+// ── MODE 2 ──
+function runM2(){
+  const goal=document.getElementById('m2-goal').value.trim();
+  const country=document.getElementById('m2-country').value.trim();
+  if(!goal){document.getElementById('m2-goal').style.borderColor='#E24B4A';document.getElementById('m2-goal').focus();return;}
+  if(!country){document.getElementById('m2-country').style.borderColor='#E24B4A';document.getElementById('m2-country').focus();return;}
+  document.getElementById('m2-btn').disabled=true;
+  document.getElementById('m2-form-wrap').classList.add('hidden');
+  document.getElementById('m2-loading').classList.remove('hidden');
+  const budget=document.getElementById('m2-budget').value.trim();
+  const iv=startLoader(['Mapping your local market...','Researching regulations...','Building vendor list...','Writing dos & don\'ts...','Finalising playbook...'],document.getElementById('m2-ls'));
+  const prompt=`You are an expert local business advisor. User wants to: "${goal}" in ${country}${budget?', budget: '+budget:''}.
+Respond ONLY with valid JSON (no markdown, no code blocks):
+{"title":"3-5 word title","country":"${country}","summary":"2-sentence overview specific to ${country}.","phases":[{"name":"2-3 word name","overview":"2-3 sentences what this phase involves in ${country}.","dos":["specific do 1","specific do 2","specific do 3","specific do 4"],"donts":["specific dont 1","specific dont 2","specific dont 3"],"vendors":[{"type":"local|online|govt","name":"Vendor category","description":"What to look for, realistic price range in ${country} local currency","tip":"One genuine insider tip for ${country}"}],"expect":[{"time":"Week 1-2","what":"realistic outcome"},{"time":"Week 3-4","what":"next milestone"}]}]}
+Rules: exactly 5 phases, 2-3 vendors per phase, all prices in ${country} local currency, mention real platform/agency/government body names in ${country}.`;
+  callAI(prompt).then(raw=>{
+    clearInterval(iv);
+    try{
+      S.m2Plan=JSON.parse(raw.replace(/```json|```/g,'').trim());
+      S.m2Phase=0;S.m2Done=[];
+      S.plans.push({goal,country,plan:S.m2Plan,phase:0,done:[],date:new Date().toLocaleDateString()});
+      document.getElementById('m2-loading').classList.add('hidden');
+      document.getElementById('m2-result').classList.remove('hidden');
+      document.getElementById('m2-goal-lbl').textContent=goal+' · '+country;
+      document.getElementById('m2-rtitle').textContent=S.m2Plan.title||goal;
+      document.getElementById('m2-rsub').textContent=S.m2Plan.summary||'';
+      renderPhases();
+      document.getElementById('dash-dot').style.display='block';
+    }catch(e){
+      document.getElementById('m2-loading').classList.add('hidden');
+      document.getElementById('m2-form-wrap').classList.remove('hidden');
+      document.getElementById('m2-btn').disabled=false;
+    }
+  }).catch(()=>{
+    clearInterval(iv);
+    document.getElementById('m2-loading').classList.add('hidden');
+    document.getElementById('m2-form-wrap').classList.remove('hidden');
+    document.getElementById('m2-btn').disabled=false;
+  });
+}
+
+function renderPhases(){
+  const bar=document.getElementById('phase-bar');bar.innerHTML='';
+  (S.m2Plan.phases||[]).forEach((ph,i)=>{
+    const done=S.m2Done.includes(i),act=i===S.m2Phase;
+    const d=document.createElement('div');
+    d.className='ph'+(done?' ph-done':act?' ph-act':'');
+    d.innerHTML=`<div class="ph-n">0${i+1}</div><div class="ph-nm">${ph.name}</div>`;
+    d.onclick=()=>goPhase(i);bar.appendChild(d);
+  });
+  const area=document.getElementById('phase-content');area.innerHTML='';
+  (S.m2Plan.phases||[]).forEach((ph,i)=>{
+    const div=document.createElement('div');
+    div.className='pc'+(i===S.m2Phase?' act':'');
+    div.id='pc-'+i;div.innerHTML=buildPhase(ph,i);area.appendChild(div);
+  });
+}
+
+function buildPhase(ph,i){
+  const isLast=i===S.m2Plan.phases.length-1;
+  const vHTML=(ph.vendors||[]).map(v=>`<div class="vr"><span class="vbadge ${v.type==='local'?'vl':v.type==='online'?'vo':'vg'}">${v.type}</span><div><div class="vn">${v.name}</div><div class="vd">${v.description}</div>${v.tip?`<span class="vtip">Tip: ${v.tip}</span>`:''}</div></div>`).join('');
+  const eHTML=(ph.expect||[]).map(e=>`<div class="er"><div class="et">${e.time}</div><div class="ed">${e.what}</div></div>`).join('');
+  const dosHTML=(ph.dos||[]).map(d=>`<div class="di"><div class="ddot"></div><span>${d}</span></div>`).join('');
+  const dntHTML=(ph.donts||[]).map(d=>`<div class="di"><div class="ddot"></div><span>${d}</span></div>`).join('');
+  return `
+  <div class="sb"><div class="sh"><div class="si" style="background:#E1F5EE;"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#1D9E75" stroke-width="1"/><path d="M5 2.5v3L6.5 7" stroke="#1D9E75" stroke-width="1" stroke-linecap="round"/></svg></div><div class="st">What this phase involves</div></div><div class="sbody"><p>${ph.overview}</p></div></div>
+  <div class="sb"><div class="sh"><div class="si" style="background:#F1EFE8;"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2 2 5-4" stroke="#5F5E5A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="st">Dos & don'ts</div></div><div class="sbody"><div class="dnd"><div class="dc do"><div class="dl">Do this</div>${dosHTML}</div><div class="dc dn"><div class="dl">Avoid</div>${dntHTML}</div></div></div></div>
+  <div class="sb"><div class="sh"><div class="si" style="background:#E6F1FB;"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="1" y="1" width="8" height="8" rx="1.5" stroke="#378ADD" stroke-width="1"/><path d="M3.5 5h3M5 3.5v3" stroke="#378ADD" stroke-width="1" stroke-linecap="round"/></svg></div><div class="st">Who to approach & where to look</div></div><div class="sbody">${vHTML}</div></div>
+  <div class="sb"><div class="sh"><div class="si" style="background:#FAEEDA;"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3.5" stroke="#BA7517" stroke-width="1"/><path d="M5 3v2.5L6.5 7" stroke="#BA7517" stroke-width="1" stroke-linecap="round"/></svg></div><div class="st">What to expect</div></div><div class="sbody">${eHTML}</div></div>
+  <div class="pnav">
+    <button class="abtn" onclick="goPhase(${i-1})" ${i===0?'disabled':''} style="font-size:11px;padding:6px 12px;">← Prev</button>
+    <span class="pnav-info">Phase ${i+1} of ${S.m2Plan.phases.length}</span>
+    ${isLast
+      ?`<button class="abtn primary" onclick="finishPlan(${i})" style="font-size:11px;padding:6px 12px;">Mark complete ✓</button>`
+      :`<button class="abtn primary" onclick="nextPhase(${i})" style="font-size:11px;padding:6px 12px;">Done → Next phase</button>`}
+  </div>`;
+}
+
+function goPhase(i){
+  if(i<0||!S.m2Plan||i>=S.m2Plan.phases.length)return;
+  S.m2Phase=i;
+  if(S.plans.length>0)S.plans[S.plans.length-1].phase=Math.max(S.plans[S.plans.length-1].phase||0,i);
+  renderPhases();window.scrollTo(0,200);
+}
+function nextPhase(i){
+  if(!S.m2Done.includes(i))S.m2Done.push(i);
+  if(S.plans.length>0){const p=S.plans[S.plans.length-1];if(!p.done.includes(i))p.done.push(i);p.phase=i+1;}
+  goPhase(i+1);
+}
+function finishPlan(i){
+  if(!S.m2Done.includes(i))S.m2Done.push(i);
+  if(S.plans.length>0){const p=S.plans[S.plans.length-1];if(!p.done.includes(i))p.done.push(i);}
+  renderPhases();showAppPage('dash');
+}
+function resetM2(){
+  S.m2Plan=null;S.m2Phase=0;S.m2Done=[];
+  document.getElementById('m2-result').classList.add('hidden');
+  document.getElementById('m2-form-wrap').classList.remove('hidden');
+  document.getElementById('m2-btn').disabled=false;
+  ['m2-goal','m2-country','m2-budget'].forEach(id=>{const el=document.getElementById(id);if(el){el.value='';el.style.borderColor='';}});
+}
+
+// ── DASHBOARD ──
+function renderDash(){
+  const empty=document.getElementById('dash-empty');
+  const content=document.getElementById('dash-content');
+  if(!S.m1Result&&S.plans.length===0){empty.classList.remove('hidden');content.innerHTML='';return;}
+  empty.classList.add('hidden');
+  const totalP=S.plans.reduce((a,p)=>(p.plan?.phases?.length||0)+a,0);
+  const doneP=S.plans.reduce((a,p)=>a+(p.done?.length||0),0);
+  const pct=totalP?Math.round(doneP/totalP*100):0;
+  let html=`<div class="dash-sum">
+    <div class="ds"><div class="ds-label">Plans started</div><div class="ds-val">${S.plans.length}</div><div class="ds-sub">execution plans</div></div>
+    <div class="ds"><div class="ds-label">Phases done</div><div class="ds-val">${doneP}/${totalP}</div><div class="ds-sub">across all plans</div></div>
+    <div class="ds"><div class="ds-label">Overall progress</div><div class="ds-val">${pct}%</div><div class="ds-sub">keep going</div></div>
+  </div>`;
+  if(S.m1Result){
+    const tm=S.m1Result.text.match(/\*\*Your ideal path\*\*[:\s\u2014-]*(.*?)(\n|$)/i);
+    const pt=tm?tm[1].replace(/\*\*/g,'').trim():'Career recommendation';
+    const streak=[1,1,1,0,1,1,0].map(on=>`<div class="sk-dot ${on?'sk-on':'sk-off'}"></div>`).join('');
+    html+=`<div class="sec-lbl">Career discovery</div>
+    <div class="m1-dash">
+      <div class="m1d-lbl">Mode 1 result · ${S.m1Result.date}</div>
+      <div class="m1d-title">${pt}</div>
+      <div class="m1d-meta">${S.m1Result.country}${S.m1Result.traits.length?' · '+S.m1Result.traits.slice(0,3).join(', '):''}</div>
+      <div class="streak">${streak}<span class="sk-lbl">7-day check-in streak</span></div>
+    </div>`;
+  }
+  if(S.plans.length>0){
+    html+=`<div class="sec-lbl">Execution plans</div>`;
+    S.plans.forEach((p,pi)=>{
+      const phases=p.plan?.phases||[];
+      const total=phases.length,done=p.done?.length||0;
+      const cur=Math.min(p.phase||0,total-1);
+      const pct2=total?Math.round(done/total*100):0;
+      const complete=done===total&&total>0;
+      const phHTML=phases.map((ph,ii)=>{
+        const isDone=p.done?.includes(ii),isCur=ii===cur&&!isDone;
+        return `<div class="pp ${isDone?'pp-done':isCur?'pp-cur':'pp-up'}">${ph.name}</div>`;
+      }).join('');
+      html+=`<div class="plan-card">
+        <div class="pc-hdr">
+          <div><div class="pc-title">${p.plan?.title||p.goal}</div><div class="pc-meta">${p.country} · Started ${p.date}</div></div>
+          <span class="pc-badge ${complete?'pbd':'pba'}">${complete?'Done':'Active'}</span>
+        </div>
+        <div class="prog-wrap">
+          <div class="prog-lbl"><span>Progress</span><span>${pct2}%</span></div>
+          <div class="prog-bar-wrap"><div class="prog-fill" style="width:${pct2}%"></div></div>
+        </div>
+        <div class="plan-phases">${phHTML}</div>
+        ${!complete?`<div class="resume-row" onclick="resumePlan(${pi})">
+          <div><div class="resume-text">Resume →</div><div class="resume-hint">Currently: ${phases[cur]?.name||'Phase '+(cur+1)}</div></div>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2.5l4 3.5-4 3.5" stroke="#1D9E75" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>`:`<div style="padding:7px 13px;font-size:11px;color:#1D9E75;text-align:center;background:#E1F5EE;">All phases complete 🎉</div>`}
+      </div>`;
+    });
+  }
+  content.innerHTML=html;
+}
+
+function resumePlan(pi){
+  const p=S.plans[pi];if(!p)return;
+  S.m2Plan=p.plan;S.m2Phase=p.phase||0;S.m2Done=[...(p.done||[])];
+  document.getElementById('m2-form-wrap').classList.add('hidden');
+  document.getElementById('m2-loading').classList.add('hidden');
+  document.getElementById('m2-result').classList.remove('hidden');
+  document.getElementById('m2-goal-lbl').textContent=(p.goal||'')+' · '+(p.country||'');
+  document.getElementById('m2-rtitle').textContent=p.plan?.title||p.goal||'';
+  document.getElementById('m2-rsub').textContent=p.plan?.summary||'';
+  renderPhases();switchMode(2);showAppPage('home');
+}
+</script>
+</body>
+</html>
